@@ -1,5 +1,6 @@
 import os
 import sys
+import socket
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
@@ -21,7 +22,9 @@ class PodExposer(Base):
         pass
 
     def run(self):
-        pod_name = os.environ.get("POD_NAME")
+        #The fastest and documented way to get a pod name is get HOSTNAME value (see https://kubernetes.io/docs/concepts/containers/container-environment/)
+        #Second way - set env variable POD_NAME in deploy definition 
+        pod_name = socket.gethostname() #The fastest way
         if pod_name is not None:
             print(pod_name)
         else:
@@ -34,4 +37,6 @@ class PodExposer(Base):
         pass
 
 if __name__ == '__main__':
-    sys.exit(Base().execute())
+    #The class "Base" in this case is an inherited class, and the methods are implemented in the class PodExposer()
+    p = PodExposer()
+    sys.exit(p.execute())

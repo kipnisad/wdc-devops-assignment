@@ -16,7 +16,7 @@ class ChuckNorris(Base):
         super().__init__()
 
     def add_arguments(self):
-        self.parser.add_argument("--url", dest="url", help="url to Chuck Norris API URL", default=None)
+        self.parser.add_argument("--url", dest="url", help="url to Chuck Norris API URL", default="None")
 
     def prepare(self):
         pass
@@ -37,4 +37,6 @@ class ChuckNorris(Base):
         pass
 
 if __name__ == '__main__':
-    sys.exit(Base().execute())
+    #The class "Base" in this case is an inherited class, and the methods are implemented in the class ChuckNorris
+    c = ChuckNorris() # We need create object from class, or as variant define @staticmethod
+    sys.exit(c.execute())
